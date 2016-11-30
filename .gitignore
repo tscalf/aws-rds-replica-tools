@@ -1,0 +1,9 @@
+boto*
+concurrent
+dateutil
+docutils*
+futures*
+jmespath*
+python*
+s3*
+six*
