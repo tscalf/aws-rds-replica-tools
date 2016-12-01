@@ -8,7 +8,7 @@ rds = session.client('rds')
 waiter = rds.get_waiter('db_instance_available')
 
 parent_name = raw_input('Enter the database name: ')
-target_name = parent_name + '-schema-update'
+first_name = parent_name + '-schema-update'
 
 def create_replica(parent_database,target_database):
     try:
@@ -22,4 +22,4 @@ def create_replica(parent_database,target_database):
         sys.exit(1)
 
 if __name__ == '__main__':
-    create_replica(parent_name, target_name)
+    create_replica(parent_name, first_name)
