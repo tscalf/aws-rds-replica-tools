@@ -38,6 +38,6 @@ def rename_instance(orig_name, new_name):
         sys.exit(1)
 
 if __name__ == '__main__':
-    # promote_instance(target_name)
+    promote_instance(target_name)
     rename_instance(parent_name, archive_name)
     rename_instance(target_name, parent_name)
