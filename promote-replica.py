@@ -29,15 +29,20 @@ def rename_instance(orig_name, new_name):
     try:
         print "Attempting to rename database: {} to {}".format(orig_name, new_name)
         instance = rds.modify_db_instance(DBInstanceIdentifier=orig_name, NewDBInstanceIdentifier=new_name, ApplyImmediately=True)
-        time.sleep (30)
-        print "Waiting for rename of instance: {}".format(orig_name)
-        waiter.wait(DBInstanceIdentifier=new_name)
-        print "Instance {} renamed to {}.".format(orig_name,new_name)
+        # time.sleep (30)
+        # print "Waiting for rename of instance: {}".format(orig_name)
+        # waiter.wait(DBInstanceIdentifier=new_name)
+        # print "Instance {} renamed to {}.".format(orig_name,new_name)
     except botocore.exceptions.ClientError as e:
         print e.message
         sys.exit(1)
 
 if __name__ == '__main__':
     promote_instance(target_name)
+    #TODO: Enable Backups
+    #TODO: Change the parameter group so Replicas are not writable.
     rename_instance(parent_name, archive_name)
+    print 'Monitor AWS console for the instance rename to complete.'
+    raw_input('Press enter to continue: ')
     rename_instance(target_name, parent_name)
+    print 'Continue monitoring RDS console for the instance reboots to complete.'

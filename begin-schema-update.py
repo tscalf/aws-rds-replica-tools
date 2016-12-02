@@ -23,3 +23,4 @@ def create_replica(parent_database,target_database):
 
 if __name__ == '__main__':
     create_replica(parent_name, first_name)
+    print 'REMINDER: Alter the datbase parameter group to allow write access for the instance: {}.'.format(first_name)
