@@ -14,6 +14,23 @@ parent_name = raw_input('Enter the database name: ')
 target_name = parent_name + '-schema-update'
 archive_name = parent_name + '-old'
 
+def verify_instances(parent_database, target_database, archive_database):
+    try:
+        rds.describe_db_instances(DBInstanceIdentifier=parent_database)
+        rds.describe_db_instances(DBInstanceIdentifier=target_database)
+    except botocore.exceptions.ClientError as e:
+        print e.message
+        sys.exit(1)
+
+    try:
+        rds.describe_db_instances(DBInstanceIdentifier=archive_database)
+        print "The archive database, {}, exists and it should not. Exiting.".format(archive_database)
+        sys.exit(1)
+    except botocore.exceptions.ClientError as e:
+        print "Database validation complete. Proceeding with promotion."
+
+
+
 def promote_instance(parent_database):
     try:
         print "Attempting to promote replica: {}".format( parent_database)
@@ -38,6 +55,7 @@ def rename_instance(orig_name, new_name):
         sys.exit(1)
 
 if __name__ == '__main__':
+    verify_instances(parent_name,target_name,archive_name)
     promote_instance(target_name)
     #TODO: Enable Backups
     #TODO: Change the parameter group so Replicas are not writable.
