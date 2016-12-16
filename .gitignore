@@ -7,3 +7,5 @@ jmespath*
 python*
 s3*
 six*
+split-replicas.py
+promote-split-replica.py
