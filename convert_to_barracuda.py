@@ -55,10 +55,10 @@ def main():
     '''
     if 'LANDSCAPE' not in os.environ:
         os.environ['LANDSCAPE'] = raw_input("Enter the landscape of the taget instance: ")
-    landscape = os.enviro['LANDSCAPE']
+    landscape = os.environ['LANDSCAPE']
     if 'ENVIRONMENT' not in os.environ:
         os.environ['ENVIRONMENT'] = raw_input("Enter the environment of the taget instance: ")
-    environment = os.enviro['ENVIRONMENT']
+    environment = os.environ['ENVIRONMENT']
     if 'HOST_ID' not in os.environ:
         os.environ['HOST_ID'] = raw_input("Enter the host id of the taget instance: ")
     host_id = os.environ['HOST_ID']
