@@ -67,7 +67,7 @@ def main():
     dbschema = os.environ['DBSCHEMA']
     creds = get_db_credentials(landscape=landscape, environment=environment,
                                dbinstanceidentifier=host_id, dbschema=dbschema)
-    if 'HOST_OVERIDE' not in os.environ:
+    if 'HOST_OVERIDE' in os.environ:
         if 'DB_HOST' not in os.environ:
             os.environ['DB_HOST'] = raw_input("Enter the Override Hostname")
         db_host = os.environ['DB_HOST']
